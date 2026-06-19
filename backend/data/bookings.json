@@ -1,0 +1,20 @@
+[
+  {
+    "id": "BOOK-68BA1004",
+    "venueId": "badminton-2",
+    "venueName": "Court Badminton 2",
+    "venueType": "badminton",
+    "date": "2026-06-19",
+    "timeSlot": "15:00",
+    "duration": 1,
+    "amount": 85000,
+    "currency": "IDR",
+    "customerName": "muh aril andrian",
+    "customerEmail": "muharilandrian@gmail.com",
+    "customerPhone": "085314702438",
+    "status": "PENDING",
+    "xenditInvoiceId": "6a357f759cc85f96c7c7f656",
+    "xenditInvoiceUrl": "https://checkout-staging.xendit.co/web/6a357f759cc85f96c7c7f656",
+    "createdAt": "2026-06-19T17:42:01.564Z"
+  }
+]
