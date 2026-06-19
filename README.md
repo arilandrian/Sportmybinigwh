@@ -1,81 +1,239 @@
 # 🏟️ Sportmybinigwh
 
-Sportmybinigwh adalah platform *booking* (penyewaan) lapangan olahraga (futsal, badminton, tenis) modern dengan antarmuka yang elegan bergaya *WHOOP-style* dan sudah terintegrasi secara langsung dengan sistem pembayaran instan **Xendit**.
+Sportmybinigwh adalah platform **Software as a Service (SaaS)** yang menyediakan layanan pemesanan fasilitas olahraga secara online. Pengguna dapat memilih lapangan olahraga yang tersedia, menentukan jadwal bermain, melakukan pemesanan, dan langsung menyelesaikan pembayaran melalui sistem pembayaran digital yang terintegrasi dengan **Xendit**.
 
-## 📋 Persyaratan Sistem (System Requirements)
-
-Bagi Anda (atau developer lain) yang ingin menjalankan, memodifikasi, atau menggunakan aplikasi ini di komputer lokal, berikut adalah persyaratannya:
-
-### 1. Kebutuhan Perangkat Lunak (Software)
-* **Node.js**: Versi 18.x atau yang lebih baru (Disarankan menggunakan versi LTS terbaru). Anda bisa mengunduhnya di [nodejs.org](https://nodejs.org/).
-* **NPM**: Biasanya sudah satu paket (ter-install otomatis) saat Anda meng-install Node.js. Versi 8.x ke atas disarankan.
-* **Git**: Digunakan untuk mengkloning repositori ini (opsional jika mendownload via zip). [git-scm.com](https://git-scm.com/)
-* **Code Editor**: Visual Studio Code (sangat disarankan) atau editor kode lainnya.
-
-### 2. Kebutuhan Layanan Pihak Ketiga
-* **Akun Xendit**: Anda wajib memiliki akun Xendit yang sudah aktif (cukup mode Test/Sandbox) untuk memproses API pembuatan Invoice Pembayaran. Daftar di [xendit.co](https://www.xendit.co/).
+Aplikasi dirancang dengan arsitektur modern menggunakan **React.js** pada sisi frontend dan **Node.js + Express.js** pada sisi backend sehingga memberikan pengalaman pengguna yang cepat, responsif, dan mudah digunakan.
 
 ---
 
-## 🚀 Cara Instalasi & Menjalankan Aplikasi
+# 🚀 Fitur Utama
 
-Aplikasi ini dibagi menjadi dua bagian: **Frontend** (Tampilan/React) dan **Backend** (API/Express). Keduanya harus dijalankan secara bersamaan.
+## 📅 Sistem Booking Lapangan
 
-### Langkah 1: Clone & Setup Awal
-Buka terminal Anda dan jalankan perintah berikut:
+* Pemesanan lapangan olahraga secara online.
+* Pemilihan jadwal bermain.
+* Informasi harga yang ditampilkan secara transparan.
+* Proses reservasi yang sederhana dan cepat.
+
+## 💳 Integrasi Pembayaran Online
+
+* Terintegrasi langsung dengan Xendit.
+* Pembuatan invoice pembayaran secara otomatis.
+* Redirect pembayaran instan setelah booking dibuat.
+* Verifikasi transaksi secara real-time.
+
+## 🎨 Modern User Interface
+
+* Desain modern terinspirasi dari dashboard WHOOP.
+* Tampilan responsif untuk desktop maupun mobile.
+* Navigasi sederhana dan mudah digunakan.
+
+## ⚡ Arsitektur Frontend & Backend Terpisah
+
+* Frontend React berjalan secara independen.
+* Backend Express menyediakan REST API.
+* Mudah dikembangkan dan di-deploy secara terpisah.
+
+---
+
+# 🏗️ Arsitektur Sistem
+
+```text
+User Browser
+      │
+      ▼
+Frontend (React + Vite)
+      │
+      ▼
+Backend API (Express.js)
+      │
+      ├────────► Xendit API
+      │
+      ▼
+JSON Database
+```
+
+### Alur Sistem
+
+1. Pengguna membuka website Sportmybinigwh.
+2. Pengguna memilih fasilitas olahraga dan jadwal yang tersedia.
+3. Frontend mengirimkan data booking ke Backend API.
+4. Backend membuat invoice pembayaran melalui Xendit.
+5. Xendit mengembalikan URL pembayaran.
+6. Pengguna menyelesaikan pembayaran.
+7. Status booking diperbarui setelah pembayaran berhasil diverifikasi.
+
+---
+
+# 🛠️ Teknologi yang Digunakan
+
+| Teknologi        | Kegunaan               |
+| ---------------- | ---------------------- |
+| React.js         | Frontend Framework     |
+| Vite             | Build Tool             |
+| React Router DOM | Routing Frontend       |
+| CSS              | User Interface Styling |
+| Node.js          | Runtime Backend        |
+| Express.js       | REST API Framework     |
+| UUID             | Pembuatan ID Unik      |
+| Xendit SDK       | Payment Gateway        |
+| JSON File System | Penyimpanan Data       |
+| GitHub           | Version Control        |
+
+---
+
+# 📋 Persyaratan Sistem
+
+Sebelum menjalankan aplikasi, pastikan perangkat Anda memiliki:
+
+## Software
+
+* Node.js 18 atau lebih baru
+* NPM 8 atau lebih baru
+* Git
+* Visual Studio Code (opsional)
+
+## Layanan Eksternal
+
+* Akun Xendit Sandbox/Test Mode
+* API Key Xendit yang aktif
+
+---
+
+# ⚙️ Instalasi Lokal
+
+## Clone Repository
+
 ```bash
-# Clone repositori
 git clone https://github.com/arilandrian/Sportmybinigwh.git
 cd Sportmybinigwh
 ```
 
-### Langkah 2: Setup Backend (API)
-Buka terminal baru untuk setup Backend:
-```bash
-# Masuk ke folder backend
-cd backend
+---
 
-# Install semua dependencies yang dibutuhkan
+## Setup Backend
+
+Masuk ke folder backend:
+
+```bash
+cd backend
 npm install
 ```
 
-**Konfigurasi Environment Backend:**
-1. Buat sebuah file baru bernama `.env` di dalam folder `backend`.
-2. Buka dashboard Xendit Anda, masuk ke **Settings > Developers > API Keys**, lalu generate *Secret Key* baru (harus memiliki akses *WRITE* untuk *Money-In/Invoice*).
-3. Salin format di bawah ini ke dalam file `.env` Anda:
+### Konfigurasi Environment
+
+Buat file `.env`:
+
 ```env
-XENDIT_SECRET_KEY=xnd_development_KEY_ANDA_DISINI
+XENDIT_SECRET_KEY=xnd_development_your_key_here
 FRONTEND_URL=http://localhost:5173
 PORT=5000
 ```
-4. Jalankan server Backend:
+
+Jalankan backend:
+
 ```bash
 npm run dev
 ```
-*(Backend akan berjalan di `http://localhost:5000`)*
 
-### Langkah 3: Setup Frontend (UI Website)
-Buka terminal baru (biarkan terminal backend tetap berjalan):
-```bash
-# Masuk ke folder frontend
-cd frontend
+Backend akan berjalan pada:
 
-# Install semua dependencies yang dibutuhkan
-npm install
-
-# Jalankan server Frontend
-npm run dev
+```text
+http://localhost:5000
 ```
-*(Frontend akan berjalan di `http://localhost:5173`)*
-
-### Langkah 4: Buka Aplikasi
-Buka browser favorit Anda (Chrome, Firefox, Safari) lalu kunjungi alamat:
-👉 **http://localhost:5173**
 
 ---
 
-## 🛠️ Teknologi yang Digunakan
-* **Frontend**: React.js, Vite, React Router DOM, Pure CSS (Tanpa Tailwind/Bootstrap).
-* **Backend**: Node.js, Express.js, UUID.
-* **Payment Gateway**: Xendit Node SDK.
-* **Database**: JSON File System (sebagai mock database MVP).
+## Setup Frontend
+
+Buka terminal baru:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend akan berjalan pada:
+
+```text
+http://localhost:5173
+```
+
+---
+
+# ▶️ Menjalankan Aplikasi
+
+Pastikan kedua service berikut berjalan:
+
+* Backend API
+* Frontend React
+
+Kemudian buka browser dan akses:
+
+```text
+http://localhost:5173
+```
+
+---
+
+# 📂 Struktur Proyek
+
+```text
+Sportmybinigwh/
+│
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   └── package.json
+│
+├── backend/
+│   ├── routes/
+│   ├── controllers/
+│   ├── services/
+│   ├── database/
+│   ├── server.js
+│   └── package.json
+│
+└── README.md
+```
+
+---
+
+# ☁️ Deployment
+
+Aplikasi dirancang agar dapat di-deploy pada berbagai platform cloud modern seperti:
+
+* Amazon Web Services (AWS)
+* Google Cloud Platform (GCP)
+* Microsoft Azure
+* DigitalOcean
+* Railway
+* Render
+* Vercel
+
+Frontend dan Backend dapat di-deploy secara terpisah sesuai kebutuhan infrastruktur.
+
+---
+
+# 🔒 Keamanan
+
+* API Key Xendit disimpan melalui file environment (.env).
+* Secret key tidak disimpan pada source code.
+* Pemisahan frontend dan backend meningkatkan keamanan aplikasi.
+* Validasi data dilakukan sebelum pembuatan invoice pembayaran.
+* Integrasi menggunakan SDK resmi Xendit.
+
+---
+
+# 👥 Tim Pengembang
+
+* Muhammad Safril
+* Muhammad Aril Andrian
+* Jeremy Revaldo Latuperisa
+
+---
+
+# 📄 Lisensi
+
+Proyek ini dikembangkan sebagai bagian dari tugas mata kuliah Cloud Computing Program Studi Ilmu Komputer Universitas Halu Oleo.
