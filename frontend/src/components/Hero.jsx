@@ -17,8 +17,8 @@ export default function Hero() {
         </div>
 
         <h1 className="hero__headline">
-          MAINKAN<br />
-          <span>GAME</span><br />
+          BERIKAN<br />
+          <span>PEFORMA</span><br />
           TERBAIKMU
         </h1>
 
