@@ -35,7 +35,7 @@ export default function Footer() {
             <h4 className="footer__col-title">Kontak</h4>
             <a href="mailto:hello@sportmybinigwh.com" className="footer__link">hello@sportmybinigwh.com</a>
             <a href="tel:+6281234567890" className="footer__link">+62 812-3456-7890</a>
-            <span className="footer__link">Jl. Olahraga No. 1, Jakarta</span>
+            <span className="footer__link">Jl. Olahraga No. 1, Kendari</span>
           </div>
         </div>
 
